@@ -76,7 +76,7 @@ RUN curl -O https://efa-installer.amazonaws.com/aws-efa-installer-latest.tar.gz 
 RUN cd /usr/local/src && \
     git clone https://github.com/tvegas1/ucx.git && \
     cd ucx &&                   \
-    git checkout 1dbdc9b10ab3de1dbd7517071738ec7ed1c4a888 &&     \
+    git checkout b138bb1d5096dca6e912b15e6bcadd9c47e95e9f &&     \
     ./autogen.sh && ./configure \
     --prefix=/usr/local/ucx     \
     --enable-shared             \
