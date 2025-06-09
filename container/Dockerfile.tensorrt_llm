@@ -301,6 +301,7 @@ FROM build AS dev
 WORKDIR /workspace
 COPY --from=wheel_builder /workspace/dist/ /workspace/dist/
 COPY --from=wheel_builder /workspace/target/ /workspace/target/
+COPY --from=wheel_builder /opt/nvidia/nvda_nixl /opt/nvidia/nvda_nixl
 # Copy Cargo cache to avoid re-downloading dependencies
 COPY --from=wheel_builder $CARGO_HOME $CARGO_HOME
 
@@ -335,6 +336,8 @@ RUN . /opt/dynamo/venv/bin/activate && \
 # TODO: In future, we may use a virtualenv for everything and remove this.
 RUN pip install dist/ai_dynamo_runtime*cp312*.whl  && \
     pip install dist/ai_dynamo*any.whl
+
+ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/nvidia/nvda_nixl/lib/x86_64-linux-gnu/
 
 ENV DYNAMO_HOME=/workspace
 
